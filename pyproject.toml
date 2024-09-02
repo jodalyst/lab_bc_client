@@ -1,0 +1,30 @@
+
+[project]
+name = "lab_bc_client"
+version = "1.0.1"
+authors = [
+  { name="Joe Steinmeyer", email="jodalyst@mit.edu" },
+]
+description = "client-side interface for lab-bc"
+readme = "README.md"
+
+requires-python = ">=3.8"
+
+scripts = { lab-bc = "lab_bc_client.runner:main" }
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+  "requests",
+]
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[project.urls]
+Homepage = "https://fpga.mit.edu/6205/F24/documentation/lab-bc"
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
