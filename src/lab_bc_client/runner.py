@@ -50,7 +50,7 @@ def main():
     ARCHIVE = "_submissions" #directory where tar files are stored
 
     TARGET_FILE = None
-    RESULT_NAME = None
+    RESULT_NAME = 'obj' #override (no need to put here anymore)
     command = sys.argv[1]
     if command == "configure":
         create_config()
@@ -60,7 +60,8 @@ def main():
         USER = result[0]
         ID = result[1]
         TARGET_FILE = sys.argv[2]
-        RESULT_NAME = sys.argv[3]
+        #RESULT_NAME = sys.argv[3]
+        RESULT_NAME = 'obj'
     else:
         print(f'Command {command} is invalid.  Try either "configure" or "run")')
         return
