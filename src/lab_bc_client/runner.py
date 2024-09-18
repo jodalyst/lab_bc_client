@@ -39,7 +39,8 @@ def main():
     OUTPUT_DIR = 'obj'
     SIM = 'sim'
     MODEL = 'model'
-    IGNORES = [OUTPUT_DIR,HISTORY_ARCHIVE,SIM,MODEL]
+    CONTROL = 'ctrl'
+    IGNORES = [OUTPUT_DIR,HISTORY_ARCHIVE,SIM,MODEL,CONTROL]
     USER = None
     ID = None
     #MAIN_SERVER = "http://127.0.0.1:8000"
