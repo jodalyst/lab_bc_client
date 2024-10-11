@@ -40,7 +40,7 @@ def main():
     SIM = 'sim'
     MODEL = 'model'
     CONTROL = 'ctrl'
-    IGNORES = [OUTPUT_DIR,HISTORY_ARCHIVE,SIM,MODEL,CONTROL]
+    IGNORES = [OUTPUT_DIR,HISTORY_ARCHIVE,SIM,MODEL,CONTROL,'.git','.DS_Store']
     USER = None
     ID = None
     #MAIN_SERVER = "http://127.0.0.1:8000"
@@ -76,6 +76,7 @@ def main():
     comp_file = f"{TIMESTAMP}_sub.zip"
     res_file = f"{TIMESTAMP}_res.zip"
     zf = zipfile.ZipFile(comp_file, "w")
+    print("Zipping folders. Remember if the size of your total zip is >5MB, the server may reject it!")
     for dirname, subdirs, files in os.walk(TARGET_FILE):
       #print(f"{dirname}, {subdirs}, {files}")
         for dir in IGNORES:
