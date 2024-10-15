@@ -40,7 +40,7 @@ def main():
     SIM = 'sim'
     MODEL = 'model'
     CONTROL = 'ctrl'
-    IGNORES = [OUTPUT_DIR,HISTORY_ARCHIVE,SIM,MODEL,CONTROL,'.git','.DS_Store']
+    IGNORES = [OUTPUT_DIR,HISTORY_ARCHIVE,SIM,MODEL,CONTROL,'.git','.DS_Store','util','sim_build','ctrl']
     USER = None
     ID = None
     #MAIN_SERVER = "http://127.0.0.1:8000"
