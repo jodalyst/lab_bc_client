@@ -10,9 +10,9 @@ The lab-bc client software requires only Python. Greater than 3.12 is recommende
 python3 -m venv 6205_python
 ```
 
-While no strictly necessary, you can also run the virtual environment creation with the `--copies` modifier to ensure the virtual environment is completely isolated from your system Python.
+While not strictly necessary, you can also run the virtual environment creation with the `--copies` modifier to ensure the virtual environment is completely isolated from your system Python.
 
-Activate your Python virtual environment with:
+Once created, activate your Python virtual environment with:
 
 ```
 source 6205_python/bin/activate
@@ -24,9 +24,13 @@ You should then be able to install this library by running the command:
 pip install git+https://github.com/jodalyst/lab_bc_client
 ```
 
+EZPZ.
+
 # Usage
 
 After installation in your terminal, you can use `lab-bc` at any time if you have your Python virtual environment activated.
+
+## Configuration (Do One Time After Installation)
 
 Prior to your first run on `lab-bc`, make sure to run:
 
@@ -34,7 +38,7 @@ Prior to your first run on `lab-bc`, make sure to run:
 lab-bc configure
 ```
 
-And provide your kerberos (lowercase), MIT ID, the lab-bc server endpoint (for Fall 2025 6.205/6.S965 this is likely `fpga3.mit.edu/lab-bc2`). These will be used to verify your submissions to the build server. You only need to run that once after the installation.
+And provide your kerberos (lowercase), MIT ID, the lab-bc server endpoint (for Fall 2025 6.205/6.S965 this is likely `fpga3.mit.edu/lab-bc2`). These will be used to verify your submissions to the build server. You only need to run `configure` once after the installation. The system should verify your credentials when you submit them. If you get a error/issue, read what it says...maybe you aren't in the class so your credentials aren't on the machine? Maybe you typed in the wrong server endpoint?
 
 ## Running Builds
 
@@ -66,7 +70,11 @@ For examp,e if you in a project directory and you have a simulate file called `s
 lab-bc simulate ./ sim/sim_1.py
 ```
 
-The simulation will run and the output content will show up in a `sim_build` folder.
+The simulation will run and the output content will show up in a `sim_build` folder placed in the root of your project folder.
+
+## Throttling
+
+We expect you to be verifying and testing your designs locally whenever possible.  Verilog syntax checking can very easily be done by just doing `iverilog -i -g2012 whatever.sv` where `whatever.sv` is the file you care about, the `g2012` flag tells it to use SystemVerilog and the `i` flag says to ignore modules that are used but not defined. If you choose not to do this and instead send repeated builds up to the server for things like syntax checking, this may get flagged. If you abuse `lab-bc` and/or use it to check syntax errors repeatedly (which really should be getting verified locally using icarus Verilog), the server may throttle and/or limit your submissions and/or put you into timeout.  Please be aware of this.  Additionally, if you start to prematurely terminate a lot of builds, the machine server may also start to throttle you and/or put you into timeout.
 
 # Archving
 
@@ -75,14 +83,6 @@ The simulation will run and the output content will show up in a `sim_build` fol
 # Included Files and Folders
 
 In order to minimize sending junk to the server, only a particular subset of folders and files will get sent to the server on a build or simulation. By default only the following directories will be submitted: `xdc`, `sim`, `hdl`, `data`, `ip`. If for whatever reason you need to include additional resources, in the configuration file that is written when you run `lab-bc configure` (generally located wherever your computer places configuration files which on Mac/*Nix platforms is in `~/.config/lab-bc/config.ini`, there is an additional array that you can add additional files to. For example, if you have content inside a folder called `pirated_metallica_albums`, then you would modify `config.ini` to have `additional_allows = ['pirated_metallica_albums']` and when
-
-
-
-Things will run, you'll get a readout and then all of your output files will appear in the `obj` folder inside your `project` folder when done.
-
-
-
-
 
 _This project is based on an original version developed by Jay Lang as part of his [2023 M.Eng thesis at MIT](https://dspace.mit.edu/handle/1721.1/151412?show=full).  The version found in this repo is largely a ground-up rewrite done in Python for portability and maintainability. That should not be taken as a
 
