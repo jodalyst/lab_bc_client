@@ -45,7 +45,12 @@ def create_config():
     server_endpoint = "https://"+server_endpoint
     #checking server endpoint and credentials while setting up:
     params={"user":kerberos, "id":mitid}
-    response = requests.request("GET", server_endpoint + SERVER_CHECK_ENDPOINT, params=params)
+    try:
+      response = requests.request("GET", server_endpoint + SERVER_CHECK_ENDPOINT, params=params)
+    except Exception as e:
+      print(f"Issue accessing lab-bc server: {server_endpoint}")
+      print(f"Exiting. Configuration failed.")
+      logging.error(f" {e}")
     if response.headers['content-type']=='application/json' :
       try:
         stuff = json.loads(response.text)
@@ -164,7 +169,7 @@ def main():
       if os.path.abspath(dirname) == os.path.abspath(TARGET_FOLDER):
         for dir in subdirs_copy:
           if dir not in ALLOWS + ADD_ALLOWS:
-            print(f"Removing {dir}")
+            print(f"Ignoring {dir}")
             subdirs.remove(dir)
       #print(f"{dirname}, {subdirs}, {files}")
         #for dir in IGNORES:
