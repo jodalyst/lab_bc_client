@@ -40,7 +40,7 @@ def create_config():
     config = configparser.ConfigParser()
     kerberos = input("Enter your kerberos:").lower().strip()
     mitid = int(input("Enter your MIT ID number (nine digits):").strip())
-    server_endpoint = input("Enter the Lab-bc endpoint (for example fpga2.mit.edu/lab-bc):").lower().strip()
+    server_endpoint = input('''Enter the Lab-bc endpoint (for example: fpga3.mit.edu/lab-bc2 will be getting used in F25):''').lower().strip()
     server_endpoint_orig = server_endpoint
     server_endpoint = "https://"+server_endpoint
     #checking server endpoint and credentials while setting up:
